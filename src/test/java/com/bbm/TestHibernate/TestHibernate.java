@@ -25,4 +25,13 @@ public class TestHibernate {
 
 		user.save(entityUser);
 	}
+	
+    @Test
+    public void search() {
+        UserDaoGeneric<EntityUser> user = new UserDaoGeneric<EntityUser>();
+        EntityUser entityUser = new EntityUser();
+        entityUser.setIdUser(2L);
+        entityUser = user.search(entityUser);
+        System.out.println(entityUser);
+    }
 }
