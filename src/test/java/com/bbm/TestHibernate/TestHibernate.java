@@ -2,10 +2,27 @@ package com.bbm.TestHibernate;
 
 import org.junit.Test;
 
+import com.bbm.TestHibernate.model.EntityUser;
+import com.bbm.TestHibernate.model.dao.UserDaoGeneric;
+
 public class TestHibernate {
 
 	@Test
 	public void testHibernate() {
-        HibernateUtil.getEntityManager();
-    }
+		HibernateUtil.getEntityManager();
+	}
+
+	@Test
+	public void save() {
+		UserDaoGeneric<EntityUser> user = new UserDaoGeneric<EntityUser>();
+
+		EntityUser entityUser = new EntityUser();
+		entityUser.setFirstName("aadsd");
+		entityUser.setLastName("Muas");
+		entityUser.setEmail("bimas@email.com");
+		entityUser.setUserName("oakasday");
+		entityUser.setPassword("1234");
+
+		user.save(entityUser);
+	}
 }
