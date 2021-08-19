@@ -52,6 +52,11 @@ public class EntityUser {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	@Override
+	public String toString() {
+		return "EntityUser [idUser=" + idUser + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
+				+ email + ", userName=" + userName + ", password=" + password + "]";
+	}
     
     
 }
