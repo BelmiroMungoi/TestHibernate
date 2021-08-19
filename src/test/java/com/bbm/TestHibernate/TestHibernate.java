@@ -25,13 +25,33 @@ public class TestHibernate {
 
 		user.save(entityUser);
 	}
-	
-    @Test
-    public void search() {
-        UserDaoGeneric<EntityUser> user = new UserDaoGeneric<EntityUser>();
-        EntityUser entityUser = new EntityUser();
-        entityUser.setIdUser(2L);
-        entityUser = user.search(entityUser);
-        System.out.println(entityUser);
-    }
+
+	@Test
+	public void search() {
+		UserDaoGeneric<EntityUser> user = new UserDaoGeneric<EntityUser>();
+		EntityUser entityUser = new EntityUser();
+		entityUser.setIdUser(2L);
+		entityUser = user.search(entityUser);
+		System.out.println(entityUser);
+	}
+
+	@Test
+	public void update() {
+		UserDaoGeneric<EntityUser> user = new UserDaoGeneric<EntityUser>();
+		EntityUser entityUser = user.search(5L, EntityUser.class);
+
+		entityUser.setFirstName("No Name For me");
+		entityUser.setLastName("Atualizdo");
+
+		entityUser = user.updateMerge(entityUser);
+
+		System.out.println(entityUser);
+	}
+
+	@Test
+	public void delete() {
+		UserDaoGeneric<EntityUser> user = new UserDaoGeneric<EntityUser>();
+		EntityUser entityUser = user.search(4L, EntityUser.class);
+		user.deleteById(entityUser);
+	}
 }
