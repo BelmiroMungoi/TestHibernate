@@ -15,4 +15,10 @@ public class UserDaoGeneric<E> {
 		entityManager.persist(entity);
 		transaction.commit();
 	}
+
+	public E search(E entity) {
+		Object id = HibernateUtil.getPrimaryKey(entity);
+		E e = (E) entityManager.find(entity.getClass(), id);
+		return e;
+	}
 }
