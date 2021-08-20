@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.bbm.TestHibernate.model.EntityUser;
+import com.bbm.TestHibernate.model.UserMobile;
 import com.bbm.TestHibernate.model.dao.UserDaoGeneric;
 
 public class TestHibernate {
@@ -132,6 +133,30 @@ public class TestHibernate {
 
 		for (EntityUser entityUser : list) {
 			System.out.println(entityUser);
+		}
+	}
+	
+	@Test
+	public void saveMobile() {
+		UserDaoGeneric user = new UserDaoGeneric();
+		EntityUser entityUser = (EntityUser) user.search(6L, EntityUser.class);
+		
+		UserMobile mobile = new UserMobile();
+		mobile.setType("Trabalho");
+		mobile.setPhoneNumber("1");
+		mobile.setEntityUser(entityUser);
+		
+		user.save(mobile);
+	}
+	
+	@Test
+	public void findMobile() {
+		UserDaoGeneric user = new UserDaoGeneric();
+		EntityUser entityUser = (EntityUser) user.search(6L, EntityUser.class);
+		
+		for (UserMobile userMobile : entityUser.getMobiles()) {
+			System.out.println(userMobile);
+			System.out.println("---------------------------------------------");
 		}
 	}
 }
