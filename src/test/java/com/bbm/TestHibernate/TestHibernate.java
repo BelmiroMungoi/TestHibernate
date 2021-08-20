@@ -108,7 +108,30 @@ public class TestHibernate {
 
 		Long somaId = (Long) user.getEntityManager().createQuery("select sum(u.idUser) from EntityUser u")
 				.getSingleResult();
-		
+
 		System.out.println("A soma dos ids: " + somaId);
+	}
+
+	@Test
+	public void testNamedQueryFindAll() {
+		UserDaoGeneric<EntityUser> user = new UserDaoGeneric<EntityUser>();
+
+		List<EntityUser> list = user.getEntityManager().createNamedQuery("EntityUser.findAll").getResultList();
+
+		for (EntityUser entityUser : list) {
+			System.out.println(entityUser);
+		}
+	}
+
+	@Test
+	public void testNamedQueryFindAllByName() {
+		UserDaoGeneric<EntityUser> user = new UserDaoGeneric<EntityUser>();
+
+		List<EntityUser> list = user.getEntityManager().createNamedQuery("EntityUser.findAllByName")
+				.setParameter("firstName", "Junior").getResultList();
+
+		for (EntityUser entityUser : list) {
+			System.out.println(entityUser);
+		}
 	}
 }
