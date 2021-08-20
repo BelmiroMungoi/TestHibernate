@@ -1,19 +1,21 @@
 package com.bbm.TestHibernate.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
 
 		@NamedQuery(name = "EntityUser.findAll", query = "select u from EntityUser u"),
-		@NamedQuery(name = "EntityUser.findAllByName", 
-		query = "select u from EntityUser u where u.firstName = :firstName") 
-})
+		@NamedQuery(name = "EntityUser.findAllByName", query = "select u from EntityUser u where u.firstName = :firstName") })
 public class EntityUser {
 
 	@Id
@@ -24,6 +26,9 @@ public class EntityUser {
 	private String email;
 	private String userName;
 	private String password;
+
+	@OneToMany(mappedBy = "entityUser", fetch = FetchType.EAGER)
+	private List<UserMobile> mobiles;
 
 	public Long getIdUser() {
 		return idUser;
@@ -71,6 +76,14 @@ public class EntityUser {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<UserMobile> getMobiles() {
+		return mobiles;
+	}
+
+	public void setMobiles(List<UserMobile> mobiles) {
+		this.mobiles = mobiles;
 	}
 
 	@Override
