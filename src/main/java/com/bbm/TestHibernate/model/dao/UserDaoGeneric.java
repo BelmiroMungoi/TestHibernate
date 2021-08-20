@@ -1,5 +1,7 @@
 package com.bbm.TestHibernate.model.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -50,5 +52,20 @@ public class UserDaoGeneric<E> {
 						"delete from " + entity.getClass().getSimpleName().toLowerCase() + " where idUser =" + id)
 				.executeUpdate();
 		transaction.commit();
+	}
+
+	// Metodo para listar todos os dados da bd
+	public List<E> findAll(Class<E> entity) {
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		List<E> list = entityManager.createQuery("from " + entity.getName()).getResultList();
+		transaction.commit();
+
+		return list;
+	}
+
+	//Caso haja necessidade de se usar uma nova query sql
+	public EntityManager getEntityManager() {
+		return entityManager;
 	}
 }
