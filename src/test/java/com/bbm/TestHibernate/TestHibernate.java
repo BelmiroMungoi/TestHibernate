@@ -1,5 +1,7 @@
 package com.bbm.TestHibernate;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import com.bbm.TestHibernate.model.EntityUser;
@@ -17,11 +19,11 @@ public class TestHibernate {
 		UserDaoGeneric<EntityUser> user = new UserDaoGeneric<EntityUser>();
 
 		EntityUser entityUser = new EntityUser();
-		entityUser.setFirstName("aadsd");
-		entityUser.setLastName("Muas");
-		entityUser.setEmail("bimas@email.com");
-		entityUser.setUserName("oakasday");
-		entityUser.setPassword("1234");
+		entityUser.setFirstName("Stela");
+		entityUser.setLastName("Ana");
+		entityUser.setEmail("ansa@email.com");
+		entityUser.setUserName("stela");
+		entityUser.setPassword("13675");
 
 		user.save(entityUser);
 	}
@@ -53,5 +55,39 @@ public class TestHibernate {
 		UserDaoGeneric<EntityUser> user = new UserDaoGeneric<EntityUser>();
 		EntityUser entityUser = user.search(4L, EntityUser.class);
 		user.deleteById(entityUser);
+	}
+
+	@Test
+	public void findAll() {
+		UserDaoGeneric<EntityUser> user = new UserDaoGeneric<EntityUser>();
+		List<EntityUser> list = user.findAll(EntityUser.class);
+
+		for (EntityUser entityUser : list) {
+			System.out.println(entityUser);
+			System.out.println("--------------------------");
+		}
+	}
+
+	@Test
+	public void testQuery() {
+		UserDaoGeneric<EntityUser> user = new UserDaoGeneric<EntityUser>();
+		// cria uma nova query de busca
+		List<EntityUser> list = user.getEntityManager().createQuery("from EntityUser where id = 3").getResultList();
+
+		for (EntityUser entityUser : list) {
+			System.out.println(entityUser);
+		}
+	}
+
+	@Test
+	public void testQueryMaxResult() {
+		UserDaoGeneric<EntityUser> user = new UserDaoGeneric<EntityUser>();
+		// cria uma nova query de busca e limita o numero de dados retornados
+		List<EntityUser> list = user.getEntityManager().createQuery("from EntityUser order by firstName").setMaxResults(3)
+				.getResultList();
+
+		for (EntityUser entityUser : list) {
+			System.out.println(entityUser);
+		}
 	}
 }
