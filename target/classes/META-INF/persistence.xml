@@ -4,7 +4,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 	<persistence-unit name="TestHibernate">
+
 		<class>com.bbm.TestHibernate.model.EntityUser</class>
+		<class>com.bbm.TestHibernate.model.UserMobile</class>
+
 		<properties>
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost:3306/traininghibernate" />
@@ -19,5 +22,6 @@
 				value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
+
 	</persistence-unit>
 </persistence>
