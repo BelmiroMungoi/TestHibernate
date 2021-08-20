@@ -16,6 +16,7 @@ public class EntityUser {
     private String email;
     private String userName;
     private String password;
+    
 	public Long getIdUser() {
 		return idUser;
 	}
