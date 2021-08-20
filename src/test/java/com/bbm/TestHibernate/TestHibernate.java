@@ -83,11 +83,32 @@ public class TestHibernate {
 	public void testQueryMaxResult() {
 		UserDaoGeneric<EntityUser> user = new UserDaoGeneric<EntityUser>();
 		// cria uma nova query de busca e limita o numero de dados retornados
-		List<EntityUser> list = user.getEntityManager().createQuery("from EntityUser order by firstName").setMaxResults(3)
-				.getResultList();
+		List<EntityUser> list = user.getEntityManager().createQuery("from EntityUser order by firstName")
+				.setMaxResults(3).getResultList();
 
 		for (EntityUser entityUser : list) {
 			System.out.println(entityUser);
 		}
+	}
+
+	@Test
+	public void testQueryParameter() {
+		UserDaoGeneric<EntityUser> user = new UserDaoGeneric<EntityUser>();
+		List<EntityUser> list = user.getEntityManager().createQuery("from EntityUser where firstName = :firstName")
+				.setParameter("firstName", "Stela").getResultList();
+
+		for (EntityUser entityUser : list) {
+			System.out.println(entityUser);
+		}
+	}
+
+	@Test
+	public void testQuerySoma() {
+		UserDaoGeneric<EntityUser> user = new UserDaoGeneric<EntityUser>();
+
+		Long somaId = (Long) user.getEntityManager().createQuery("select sum(u.idUser) from EntityUser u")
+				.getSingleResult();
+		
+		System.out.println("A soma dos ids: " + somaId);
 	}
 }
